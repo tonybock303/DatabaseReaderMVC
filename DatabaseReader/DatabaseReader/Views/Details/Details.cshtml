@@ -1,0 +1,211 @@
+﻿@model IEnumerable<DatabaseReader.Models.History>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.First().DateTime.ToString("dddd dd/MM/yyyy")</h2>
+
+<head>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #chart_container {
+            width: 1140px;
+            height: 500px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+        #cpm_chart_container {
+            width: 1140px;
+            height: 200px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart_container">
+        <canvas id="bar_chart"></canvas>
+    </div>
+    <div id="cpm_chart_container">
+        <canvas id="cpm_bar_chart"></canvas>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Time
+            </th>
+            <th>
+                Calories Burnt
+            </th>
+            <th>
+                Cals/min
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaloriesBurnt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaloriesBurntPerMin)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+
+    <script>
+        var selectedCaloriesArray = @Html.Raw(Json.Encode(ViewBag.CALS));
+        var timesArray = @Html.Raw(Json.Encode(ViewBag.TIME));
+        var lastWeekArray = @Html.Raw(Json.Encode(ViewBag.LAST));
+        var averageArray = @Html.Raw(Json.Encode(ViewBag.AVG));
+
+        var ctx = $('#bar_chart');
+        var barChart = new Chart(ctx, {
+
+            type: 'line',
+            data: {
+                labels: timesArray,
+                datasets: [
+                    {
+                        label: "Average",
+                        data: averageArray,
+                        backgroundColor: ["rgba(100, 100, 0, .5)", "rgba(145, 65, 72, .5)", "(0, 0, 0, .5)"],
+                        borderColor: ["rgba(242, 166, 54)", "rgba(145, 65, 72)", "(0, 0, 0)"],
+                        borderWidth: 1,
+                        pointRadius: 0
+                    },
+                    {
+                    label: "Last Week",
+                    data: lastWeekArray,
+                    backgroundColor: ["rgba(0, 255, 0, .5)", "rgba(145, 65, 72, .5)", "(0, 0, 0, .5)"],
+                    borderColor: ["rgba(242, 166, 54)", "rgba(145, 65, 72)", "(74, 25, 92)"],
+                        borderWidth: 1,
+                        pointRadius: 0
+                    },
+                    {
+                        label: "Selected",
+                        data: selectedCaloriesArray,
+                        backgroundColor: ["rgba(255, 0, 0, .5)", "rgba(255, 0, 0, .5)", "(255, 0, 0, .5)"],
+                        borderColor: ["rgba(255, 0, 0)", "rgba(255, 0, 0)", "(255, 0, 0)"],
+                        borderWidth: 1,
+                        pointRadius: 1
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Time",
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 24
+                        }
+
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Calories",
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                responsive: true,
+                legend: { display: true },
+
+            }
+        });
+
+        var averageCPMArray = @Html.Raw(Json.Encode(ViewBag.AVGCPM));
+        var CPMArray = @Html.Raw(Json.Encode(ViewBag.CPM));
+
+        var ctx = $('#cpm_bar_chart');
+        var barChart = new Chart(ctx, {
+
+            type: 'line',
+            data: {
+                labels: timesArray,
+                datasets: [
+                    {
+                        label: "Selected",
+                        data: CPMArray,
+                        backgroundColor: ["rgba(255, 0, 0, .5)", "rgba(145, 65, 72, .5)", "(0, 0, 0, .5)"],
+                        borderColor: ["rgba(242, 166, 54)", "rgba(145, 65, 72)", "(0, 0, 0)"],
+                        borderWidth: 1,
+                        pointRadius: 1
+                    },
+                    {
+                        label: "Average",
+                        data: averageCPMArray,
+                        backgroundColor: ["rgba(100, 100, 0, .5)", "rgba(145, 65, 72, .5)", "(0, 0, 0, .5)"],
+                        borderColor: ["rgba(242, 166, 54)", "rgba(145, 65, 72)", "(0, 0, 0)"],
+                        borderWidth: 1,
+                        pointRadius: 0
+                    },
+                    
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Time",
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 24
+                        }
+
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Cals p/m",
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            min: 1.0,
+                            max: 8.0,
+                            stepsize: 0.5,
+                            maxTicksLimit: 5
+                        }
+                    }]
+                },
+                responsive: true,
+                legend: { display: true },
+
+            }
+        });
+    </script>
+</body>

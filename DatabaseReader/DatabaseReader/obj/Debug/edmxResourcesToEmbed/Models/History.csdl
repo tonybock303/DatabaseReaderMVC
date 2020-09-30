@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HistoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="timeStamp" />
+      <PropertyRef Name="CaloriesBurnt" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="timeStamp" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CaloriesBurnt" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="HistoryDatabaseEntitiesNEW" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Histories" EntityType="Self.History" />
+  </EntityContainer>
+</Schema>
