@@ -9,27 +9,23 @@ namespace DatabaseReader.Controllers
 {
     public class WorkoutController : Controller
     {
-        // GET: Workout
         [HttpGet]
-        public ActionResult CreateWorkout()
+        public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateWorkout(WorkoutModel workoutModel)
+        public ActionResult Index(WorkoutModel workoutModel)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("DisplayWorkout", "Workout", workoutModel);
+                return View("CreateWorkout", workoutModel);
             }
             return View();            
         }
 
-        public ActionResult DisplayWorkout(WorkoutModel workoutModel)
-        {
-            return View(workoutModel);
-        }
+        
     }
 }
