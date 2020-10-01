@@ -17,9 +17,14 @@ namespace DatabaseReader.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateWorkout(WorkoutModel workoutModel)
         {
-            return RedirectToAction("DisplayWorkout", "Workout", workoutModel);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("DisplayWorkout", "Workout", workoutModel);
+            }
+            return View();            
         }
 
         public ActionResult DisplayWorkout(WorkoutModel workoutModel)
