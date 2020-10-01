@@ -34,7 +34,8 @@ namespace DatabaseReader.Data
         public void SaveUserProfile(UserSetting userSetting)
         {
             UserSettingsDatabaseEntities db = new UserSettingsDatabaseEntities();
-            db.UserSettings.AddOrUpdate(i => i.Id == userSetting.Id, userSetting);
+            db.UserSettings.AddOrUpdate(i => i.Id, userSetting);
+            
             db.SaveChanges();
         }
     }
