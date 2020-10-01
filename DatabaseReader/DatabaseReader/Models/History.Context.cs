@@ -13,10 +13,10 @@ namespace DatabaseReader.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HistoryDatabaseEntitiesNEW : DbContext
+    public partial class HistoryDatabaseEntities : DbContext
     {
-        public HistoryDatabaseEntitiesNEW()
-            : base("name=HistoryDatabaseEntitiesNEW")
+        public HistoryDatabaseEntities()
+            : base("name=HistoryDatabaseEntities")
         {
         }
     

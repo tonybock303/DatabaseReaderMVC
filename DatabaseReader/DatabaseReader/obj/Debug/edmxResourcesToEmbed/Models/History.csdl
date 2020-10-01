@@ -10,7 +10,7 @@
     <Property Name="CaloriesBurnt" Type="Int32" Nullable="false" />
     <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="HistoryDatabaseEntitiesNEW" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="HistoryDatabaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Histories" EntityType="Self.History" />
   </EntityContainer>
 </Schema>

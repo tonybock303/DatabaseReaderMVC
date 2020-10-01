@@ -41,7 +41,7 @@ warning 6002: The table/view 'D:\ONEDRIVE\DATA\CALORIE PREDICTOR DATABASE.MDF.db
           <Property Name="CaloriesBurnt" Type="Int32" Nullable="false" />
           <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="HistoryDatabaseEntitiesNEW" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HistoryDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Histories" EntityType="Self.History" />
         </EntityContainer>
       </Schema>
@@ -49,7 +49,7 @@ warning 6002: The table/view 'D:\ONEDRIVE\DATA\CALORIE PREDICTOR DATABASE.MDF.db
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HistoryModelStoreContainer" CdmEntityContainer="HistoryDatabaseEntitiesNEW">
+        <EntityContainerMapping StorageEntityContainer="HistoryModelStoreContainer" CdmEntityContainer="HistoryDatabaseEntities">
           <EntitySetMapping Name="Histories">
             <EntityTypeMapping TypeName="HistoryModel.History">
               <MappingFragment StoreEntitySet="History">

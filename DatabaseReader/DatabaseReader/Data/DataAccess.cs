@@ -19,7 +19,7 @@ namespace DatabaseReader.Data
 
         public List<History> GetAllHistories()
         {
-            HistoryDatabaseEntitiesNEW db = new HistoryDatabaseEntitiesNEW();
+            HistoryDatabaseEntities db = new HistoryDatabaseEntities();
             List<History> days = db.Histories.ToList();
             return days;
         }
