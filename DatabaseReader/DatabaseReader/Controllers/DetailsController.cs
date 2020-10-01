@@ -15,7 +15,7 @@ namespace DatabaseReader.Controllers
         // The number of minutes in one day
         private static readonly int _minsInOneDay = 1440;
         // How many days to look back when calculating the average of a given day
-        private static readonly int rangeInDays = 28;
+        private static readonly int rangeInDays = 100;
 
         public ActionResult Details(string id)
         {
@@ -50,12 +50,9 @@ namespace DatabaseReader.Controllers
 
         private static double[] CalculateAverageSeries(DateTime selectedDate, int rangeInDays, List<History> history, ReturnSeriesOf returnSeriesOf)
         {
-            double[] averageOfThisDay = new double[_minsInOneDay];
-            List<double[]> collectionOfDays = GetCollection(selectedDate, rangeInDays, history, returnSeriesOf);
-
-            // Calculate hourly averages of the above results
-            averageOfThisDay = GetAverage(collectionOfDays);
-            return averageOfThisDay;
+            
+            List<double[]> collectionOfDays = GetCollection(selectedDate, rangeInDays, history, returnSeriesOf);                        
+            return GetAverage(collectionOfDays);
         }
         private static List<double[]> GetCollection(DateTime selectedDate, int rangeInDays, List<History> history, ReturnSeriesOf returnDataSetType)
         {
@@ -69,7 +66,13 @@ namespace DatabaseReader.Controllers
                 DateTime date = selectedDate.AddDays(-i);
                 if (date.DayOfWeek == selectedDate.DayOfWeek)
                 {
-                    collectionOfDays.Add(CalculateSeries(date.AddDays(-i), history, returnDataSetType));
+                    List<History> currentHistory = new List<History>();
+                    currentHistory = history.Where(x => x.IsSameDate(date)).OrderBy(x => x.DateTime).ToList();
+                    if (currentHistory.Count > 0)
+                    {
+                        collectionOfDays.Add(CalculateSeries(date, history, returnDataSetType));
+                    }
+                    
                 }
             }
             return collectionOfDays;
@@ -107,9 +110,14 @@ namespace DatabaseReader.Controllers
         }
         private static double[] CalculateSeries(DateTime date, List<History> history, ReturnSeriesOf returnSeriesOf)
         {
+            
             double[] series = new double[_minsInOneDay];
             DateTime timeCounter = date;
             History[] historyEntries = history.Where(x => x.IsSameDate(date)).OrderBy(x => x.DateTime).ToArray();
+            if (historyEntries.Length == 0)
+            {
+                return new double[_minsInOneDay];
+            }
 
             int historyCount = 1; //skip the first element at 00:00 of 0
             double calsPerMin = CalculateCaloriesPerMin(historyEntries, historyCount);

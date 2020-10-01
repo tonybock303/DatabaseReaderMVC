@@ -35,10 +35,10 @@
         @Html.ActionLink("Back to List", "Days", "Days")
     </div>
     <div id="chart_container">
-        <canvas id="bar_chart"></canvas>
+        <canvas id="line_chart"></canvas>
     </div>
     <div id="cpm_chart_container">
-        <canvas id="cpm_bar_chart"></canvas>
+        <canvas id="cpm_line_chart"></canvas>
     </div>
     <table class="table">
         <tr>
@@ -79,7 +79,7 @@
         var lastWeekArray = @Html.Raw(Json.Encode(ViewBag.LAST));
         var averageArray = @Html.Raw(Json.Encode(ViewBag.AVG));
 
-        var ctx = $('#bar_chart');
+        var ctx = $('#line_chart');
         var barChart = new Chart(ctx, {
 
             type: 'line',
@@ -147,7 +147,7 @@
         var averageCPMArray = @Html.Raw(Json.Encode(ViewBag.AVGCPM));
         var CPMArray = @Html.Raw(Json.Encode(ViewBag.CPM));
 
-        var ctx = $('#cpm_bar_chart');
+        var ctx = $('#cpm_line_chart');
         var barChart = new Chart(ctx, {
 
             type: 'line',
