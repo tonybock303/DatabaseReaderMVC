@@ -11,11 +11,13 @@ namespace DatabaseReader.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Day
     {
         DateHelper dateHelper = new DateHelper();
         public string Date { get; set; }
+        public DateTime dateTime;
         public DateTime DateTime
         {
             get

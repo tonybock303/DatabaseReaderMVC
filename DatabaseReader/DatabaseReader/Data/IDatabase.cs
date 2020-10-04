@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseReader.Data
 {
-    interface IDatabase
+    public interface IDatabase
     {
         List<Day> GetAllDays();
         List<History> GetAllHistories();
