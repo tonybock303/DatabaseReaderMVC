@@ -138,6 +138,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ChartSeriesHelper.cs" />
+    <Compile Include="Helpers\ReturnSeriesOf.cs" />
     <Compile Include="Models\DateHelper.cs" />
     <Compile Include="Models\Day.Context.cs">
       <AutoGen>True</AutoGen>

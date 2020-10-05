@@ -12,8 +12,17 @@ namespace DatabaseReader.Controllers
     public class DaysController : Controller
     {
         // Our database
-        private static IDatabase db = new DataAccess();
+        private IDatabase db;
 
+        public DaysController(IDatabase db)
+        {
+            this.db = db;
+        }
+
+        public DaysController()
+        {
+            db = new DataAccess();
+        }
         public ActionResult Days()
         {
             IEnumerable<Day> days = db.GetAllDays().OrderByDescending(x => x.DateTime);
