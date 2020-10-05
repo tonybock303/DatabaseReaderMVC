@@ -245,3 +245,4 @@ C:\Users\tonyb\OneDrive\GitHub\DatabaseReaderMVC\DatabaseReader\DatabaseReader\o
 C:\Users\tonyb\OneDrive\GitHub\DatabaseReaderMVC\DatabaseReader\DatabaseReader\obj\Debug\DatabaseReader.csproj.CopyComplete
 C:\Users\tonyb\OneDrive\GitHub\DatabaseReaderMVC\DatabaseReader\DatabaseReader\obj\Debug\DatabaseReader.dll
 C:\Users\tonyb\OneDrive\GitHub\DatabaseReaderMVC\DatabaseReader\DatabaseReader\obj\Debug\DatabaseReader.pdb
+C:\Users\tonyb\OneDrive\GitHub\DatabaseReaderMVC\DatabaseReader\DatabaseReader\obj\Debug\DatabaseReader.csprojAssemblyReference.cache

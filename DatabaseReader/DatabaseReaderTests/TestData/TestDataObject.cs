@@ -71,7 +71,7 @@ namespace DatabaseReaderTests.Controllers
 
                 currentDate = new DateTime(today.AddDays(-count).Year, today.AddDays(-count).Month, today.AddDays(-count).Day);
             }
-            return randomHistoryList;
+            return randomHistoryList.OrderByDescending(x => x.DateTime).ToList();
         }
     }
 }

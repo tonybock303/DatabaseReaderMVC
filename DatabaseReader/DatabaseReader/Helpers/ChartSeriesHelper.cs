@@ -79,16 +79,14 @@ namespace DatabaseReader.Helpers
         }
         public static double[] CalculateAverageSeries(DateTime selectedDate, int rangeInDays, List<History> history, ReturnSeriesOf returnSeriesOf)
         {
-
             List<double[]> collectionOfDays = GetCollection(selectedDate, rangeInDays, history, returnSeriesOf);
             return GetAverage(collectionOfDays);
         }
 
         public static double[] CalculateSeries(DateTime date, List<History> history, ReturnSeriesOf returnSeriesOf)
         {
-
             double[] series = new double[_minsInOneDay];
-            DateTime timeCounter = date;
+            DateTime timeCounter = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0) ;
             History[] historyEntries = history.Where(x => x.IsSameDate(date)).OrderBy(x => x.DateTime).ToArray();
             if (historyEntries.Length == 0)
             {
